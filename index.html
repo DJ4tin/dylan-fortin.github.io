@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dylan Fortin, MBA</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --border: #e5e7eb;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #1d4ed8;
+      --accent-light: #eff6ff;
+      --max-width: 860px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* HERO */
+    header {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 5rem 1.5rem 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    header h1 {
+      font-size: 2.6rem;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.4rem;
+    }
+    header h1 span {
+      font-size: 1rem;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+      font-weight: normal;
+      letter-spacing: 0;
+      margin-left: 0.5rem;
+    }
+    .tagline {
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .contact-links a, .contact-links span {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .contact-links a:hover { color: var(--accent); }
+    .contact-links svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    /* MAIN LAYOUT */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem 6rem;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 3.5rem 0 0;
+    }
+    section:not(:last-child) {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 3.5rem;
+    }
+    .section-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* SUMMARY */
+    #about p {
+      font-size: 1.05rem;
+      color: #374151;
+      max-width: 720px;
+    }
+
+    /* EXPERIENCE */
+    .job {
+      margin-bottom: 2.5rem;
+    }
+    .job:last-child { margin-bottom: 0; }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      margin-bottom: 0.15rem;
+    }
+    .company {
+      font-family: 'Arial', sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--text);
+    }
+    .date {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .location {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .role {
+      margin-bottom: 0.85rem;
+    }
+    .role-title {
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .role-date {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .role ul {
+      padding-left: 1.2rem;
+    }
+    .role ul li {
+      font-size: 0.92rem;
+      color: #374151;
+      margin-bottom: 0.3rem;
+    }
+    .role-list-only {
+      list-style: none;
+      padding: 0;
+    }
+    .role-list-only li {
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    /* EDUCATION */
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-left .school {
+      font-family: 'Arial', sans-serif;
+      font-weight: bold;
+      font-size: 0.97rem;
+    }
+    .edu-left .degree {
+      font-size: 0.92rem;
+      color: #374151;
+    }
+    .edu-left .concentration {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+    }
+    .edu-right {
+      text-align: right;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid #bfdbfe;
+      border-radius: 4px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.7rem;
+    }
+
+    /* HONORS */
+    .honor-item {
+      margin-bottom: 0.75rem;
+      font-size: 0.92rem;
+      color: #374151;
+    }
+    .honor-item strong {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* INTERESTS */
+    .interests-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .interest-tag {
+      background: #f3f4f6;
+      color: #374151;
+      border-radius: 4px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.7rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.9rem; }
+      nav ul { gap: 1rem; flex-wrap: wrap; font-size: 0.75rem; }
+      .job-header { flex-direction: column; }
+      .edu-item { flex-direction: column; }
+      .edu-right { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#honors">Honors</a></li>
+      <li><a href="#interests">Interests</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Dylan Fortin<span>MBA</span></h1>
+    <p class="tagline">San Diego, CA &nbsp;·&nbsp; Strategic Risk Leader</p>
+    <div class="contact-links">
+      <a href="mailto:fortindylan@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        fortindylan@gmail.com
+      </a>
+      <a href="tel:8584425327">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.07 6.07l.97-.97a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        858.442.5327
+      </a>
+      <a href="https://www.linkedin.com/in/dylan-fortin-9a04298a/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <p class="section-label">About</p>
+      <p>Strategic risk leader with 8+ years of experience in Enterprise Risk including Third-Party Risk Management across regulated industries. Proven success in scaling vendor risk programs, implementing GRC platforms, integrating AI and automation, and regulatory compliance.</p>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <p class="section-label">Experience</p>
+
+      <!-- Axos Bank -->
+      <div class="job">
+        <div class="job-header">
+          <span class="company">Axos Bank</span>
+          <span class="date">July 2023 – Present</span>
+        </div>
+        <div class="location">San Diego, CA</div>
+
+        <div class="role">
+          <div class="role-title">Vice President, Third-Party Risk Management</div>
+          <div class="role-date">July 2023 – Present</div>
+          <ul>
+            <li>Manage TPRM function, overseeing a team of 7 responsible for the full vendor lifecycle — onboarding, due diligence, monitoring, and offboarding.</li>
+            <li>Developed and executed a target operating model that resulted in a 33% net savings in program spend year over year while scaling the program with the business.</li>
+            <li>Led an RFP process to bring in an industry-leading vendor management tool, successfully transitioning from Archer to Venminder over 6 months.</li>
+            <li>Manage ~900 vendors via workflows and score-based risk analysis to ensure compliance with SOC 1 and SOC 2 guidelines.</li>
+            <li>Established a risk and control register to ensure enterprise compliance with policies and procedures.</li>
+            <li>Responsible for development and presentation of executive and board reporting.</li>
+            <li>Partner with analytics to redesign processes including alert-based monitoring leveraging automation and AI.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="role-title">Vice President, Model Risk Management</div>
+          <div class="role-date">July 2023 – July 2024</div>
+          <ul>
+            <li>Managed MRM function, building the team and overseeing 4 analysts across the model lifecycle — development, validation, monitoring, and retirement.</li>
+            <li>Consolidated MRM under ERM and reduced external validators from 3 to 1 to reduce cost and streamline validation.</li>
+            <li>Delivered model validations for CECL, ALM, and Capital Adequacy Stress Test.</li>
+            <li>Built model inventory system in Archer for capturing new assessments and managing the active model population.</li>
+            <li>Developed MRM dashboarding in Tableau to track model findings and upcoming validations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MUFG -->
+      <div class="job">
+        <div class="job-header">
+          <span class="company">MUFG</span>
+          <span class="date">May 2015 – July 2023</span>
+        </div>
+        <div class="location">San Diego &amp; Glendale, CA</div>
+
+        <div class="role">
+          <div class="role-title">Vice President, Information Risk Analytics &amp; Data Risk Management</div>
+          <div class="role-date">May 2023 – July 2023</div>
+          <ul>
+            <li>Led monthly/quarterly board-level reporting including reconciliation and review of 30+ metrics.</li>
+            <li>Developed Tableau dashboards to inform the Chief Data Officer, Head of Risk and Controls, and Head of Information Risk Management.</li>
+            <li>Built automated solutions for metric reconciliation using Python, SQL, and Access.</li>
+            <li>Coordinated across 20+ individuals to deliver reporting timely.</li>
+            <li>Delivered Risk Governance initiatives including Risk Appetite Refresh, Risk Profile Ratings, and CPIRA.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="role-title">Assistant Vice President, Information Risk Analytics</div>
+          <div class="role-date">July 2022 – May 2023</div>
+          <ul>
+            <li>Supported Data Risk function with monthly monitoring, governance standards, and measuring program residual risk.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="role-title">Assistant Vice President, Operational, Technology &amp; Model Risk Management</div>
+          <div class="role-date">May 2020 – July 2022</div>
+          <ul>
+            <li>Provided reporting for Operational, Technology, and Model/EUCC risk types using Wdesk, Tableau, and Microsoft Office.</li>
+            <li>Partnered with the Chief Data Office to mature reporting to meet BCBS 239 and regulatory compliance standards.</li>
+            <li>Collaborated with data transformation team to automate executive and board-level reports.</li>
+            <li>Aided implementation and maturation of 30+ data-related controls.</li>
+            <li>Developed change management framework for regulatory, management, and Board reporting requirements.</li>
+            <li>Created and implemented reporting SLAs to establish accountability via quarterly metrics.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="role-title">Assistant Vice President, Risk Management</div>
+          <div class="role-date">May 2019 – May 2020</div>
+          <ul>
+            <li>Led transition to an upgraded reporting tool supporting data automation.</li>
+            <li>Developed 5+ governance documents capturing best practices across lines of business.</li>
+            <li>Managed a team of 2 and performed director-level work during extended management absence.</li>
+          </ul>
+        </div>
+
+        <ul class="role-list-only">
+          <li>Analyst, Risk Management &nbsp;·&nbsp; Aug 2017 – May 2019</li>
+          <li>Analyst, Business Management &nbsp;·&nbsp; Sep 2016 – Aug 2017</li>
+          <li>Business Analysis &amp; Process Improvement Intern, Risk Management &nbsp;·&nbsp; May 2016 – Sep 2016</li>
+          <li>Contractor, Operations and Technology &nbsp;·&nbsp; Jan 2016 – May 2016</li>
+          <li>Loan Administration Intern, Operations and Technology &nbsp;·&nbsp; May 2015 – Aug 2015</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <p class="section-label">Education</p>
+
+      <div class="edu-item">
+        <div class="edu-left">
+          <div class="school">Pepperdine Graziadio Business School</div>
+          <div class="degree">Master of Business Administration</div>
+          <div class="concentration">Concentration in Business Analytics</div>
+        </div>
+        <div class="edu-right">
+          <div>Los Angeles, CA</div>
+          <div>April 2022</div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-left">
+          <div class="school">Whittier College</div>
+          <div class="degree">Bachelor of Arts, Business Administration</div>
+          <div class="concentration">Concentration in Accounting &nbsp;·&nbsp; Minor in Spanish</div>
+        </div>
+        <div class="edu-right">
+          <div>Whittier, CA</div>
+          <div>May 2016</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <p class="section-label">Skills</p>
+      <div class="skills-grid">
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Workiva Wdesk</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Jira</span>
+        <span class="skill-tag">Lucid Chart</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Archer</span>
+        <span class="skill-tag">Venminder</span>
+        <span class="skill-tag">ServiceNow</span>
+        <span class="skill-tag">SharePoint</span>
+        <span class="skill-tag">Microsoft Word</span>
+        <span class="skill-tag">Microsoft Excel</span>
+        <span class="skill-tag">Microsoft PowerPoint</span>
+        <span class="skill-tag">Microsoft Access</span>
+        <span class="skill-tag">Microsoft Visio</span>
+        <span class="skill-tag">Power Automate</span>
+      </div>
+    </section>
+
+    <!-- HONORS -->
+    <section id="honors">
+      <p class="section-label">Honors &amp; Awards</p>
+      <div class="honor-item">
+        <strong>Whittier College Dean's List</strong> — Fall 2015, Spring 2016
+      </div>
+      <div class="honor-item">
+        <strong>Whittier College Men's Soccer</strong> — 2015 All-Academic Team &nbsp;·&nbsp; 2014/2015 Team Captain &nbsp;·&nbsp; 2013/2014 All SCIAC Second Team &nbsp;·&nbsp; 2012 Freshman Player of the Year
+      </div>
+    </section>
+
+    <!-- INTERESTS -->
+    <section id="interests">
+      <p class="section-label">Interests</p>
+      <div class="interests-list">
+        <span class="interest-tag">Technology</span>
+        <span class="interest-tag">Music</span>
+        <span class="interest-tag">Soccer</span>
+        <span class="interest-tag">Chess</span>
+        <span class="interest-tag">Reading</span>
+        <span class="interest-tag">Published Poet — Established Poets of California Youth</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2026 Dylan Fortin &nbsp;·&nbsp; San Diego, CA
+  </footer>
+
+</body>
+</html>
