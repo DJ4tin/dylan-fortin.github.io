@@ -322,26 +322,26 @@
 
     /* PRINT / PDF STYLES */
     @media print {
-      nav, .export-bar { display: none !important; }
-      body { background: #fff; font-size: 11pt; }
+      nav, .export-bar, footer { display: none !important; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { background: #fff; font-size: 10.5pt; }
       header {
-        padding: 1.5rem 1.5rem 1rem;
+        padding: 1rem 1.5rem 0.8rem;
         flex-direction: row;
-        gap: 1.5rem;
+        gap: 1.2rem;
+        border-bottom: 1.5px solid #ccc;
       }
-      .header-photo { width: 90px; height: 90px; }
-      main { padding: 0 1.5rem 2rem; }
-      section { padding: 1.2rem 0 0; }
-      section:not(:last-child) { padding-bottom: 1.2rem; }
-      .skill-tag {
-        background: none;
-        border: 1px solid #999;
-        color: #000;
-      }
-      .interest-tag { background: none; border: 1px solid #ccc; }
-      .section-label { color: #000; }
-      a { color: #000; text-decoration: none; }
-      footer { display: none; }
+      .header-photo { width: 80px; height: 80px; }
+      header h1 { font-size: 1.6rem; }
+      main { padding: 0 1.5rem 1rem; }
+      section { padding: 0.9rem 0 0; }
+      section:not(:last-child) { padding-bottom: 0.9rem; }
+      .skill-tag { background: #f0f4ff; border: 1px solid #b0c0e8; color: #1d3a8a; }
+      .interest-tag { background: #f3f4f6; border: 1px solid #ccc; }
+      .section-label { color: #1d4ed8; }
+      a { color: #111; text-decoration: none; }
+      .role ul li, .edu-left .degree, #about p { font-size: 9.5pt; }
+      .job { page-break-inside: avoid; }
     }
 
     /* FOOTER */
@@ -621,24 +621,10 @@
     &copy; 2026 Dylan Fortin &nbsp;·&nbsp; San Diego, CA
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://unpkg.com/html-docx-js@0.3.1/dist/html-docx.js"></script>
   <script>
     function exportPDF() {
-      const btn = document.querySelectorAll('.export-btn');
-      btn.forEach(b => b.style.display = 'none');
-
-      const opt = {
-        margin:      [0.5, 0.5, 0.5, 0.5],
-        filename:    'Dylan_Fortin_Resume.pdf',
-        image:       { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
-        jsPDF:       { unit: 'in', format: 'letter', orientation: 'portrait' }
-      };
-
-      html2pdf().set(opt).from(document.body).save().then(() => {
-        btn.forEach(b => b.style.display = '');
-      });
+      window.print();
     }
 
     function exportWord() {
